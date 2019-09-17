@@ -13,13 +13,12 @@ import {
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
-  Header,
   LearnMoreLinks,
   Colors,
   DebugInstructions,
   ReloadInstructions
 } from "react-native/Libraries/NewAppScreen";
-import { black } from "ansi-colors";
+import { bold } from "ansi-colors";
 
 const { width, height } = Dimensions.get("window");
 
@@ -46,7 +45,7 @@ export default class Todo extends Component {
     this.setState({ newTodo: Text });
   };
 
-  handleAddTodo() {
+  handleAddTodo = () => {
     fetch("http://10.0.3.2:3000/todos", {
       method: "POST",
       headers: {
@@ -62,14 +61,9 @@ export default class Todo extends Component {
         const todos = [...this.state.todos, todo];
         this.setState({ todos, newTodo: "" });
       });
-  }
+  };
 
-  /*handleDelete = Id => {
-    const todos = this.state.todos.filter(todo => todo.id !== Id);
-    this.setState({ todos: todos });
-  };*/
-
-  handleDelete(id) {
+  handleDelete = id => {
     fetch("http://10.0.3.2:3000/todos/" + id, {
       method: "DELETE",
       headers: {
@@ -77,24 +71,25 @@ export default class Todo extends Component {
         "Content-Type": "application/json"
       }
     });
-  }
+  };
 
   render() {
     console.log(this.state.todos);
     return (
       <>
         <View style={styles.sectionContainer}>
+          <Text style={styles.title}>Todo App</Text>
           <View style={styles.form}>
             <TextInput
               style={styles.inputBox}
               value={this.state.newTodo}
-              onChangeText={this.handleChange.bind(this)}
+              onChangeText={this.handleChange}
             ></TextInput>
             <TouchableHighlight
               style={styles.button}
-              onPress={this.handleAddTodo.bind(this)}
+              onPress={this.handleAddTodo}
             >
-              <Text style={styles.buttonText}>Tap Me</Text>
+              <Text style={styles.buttonText}>Create</Text>
             </TouchableHighlight>
           </View>
           <ScrollView style={styles.todos}>
@@ -127,6 +122,14 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter
   },
+
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "skyblue",
+    marginBottom: 90
+  },
   engine: {
     position: "absolute",
     right: 0
@@ -134,8 +137,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.white
   },
-
-  trash: {},
 
   todos: {
     alignContent: "space-between",
