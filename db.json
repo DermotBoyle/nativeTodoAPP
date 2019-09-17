@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "todo": "Code",
+      "id": 1
+    },
+    {
+      "todo": "Cook",
+      "id": 2
+    },
+    {
+      "todo": "Clean",
+      "id": 3
+    },
+    {
+      "todo": "Feed the cat",
+      "id": 4
+    },
+    {
+      "todo": "Get a job",
+      "id": 5
+    }
+  ]
+}
